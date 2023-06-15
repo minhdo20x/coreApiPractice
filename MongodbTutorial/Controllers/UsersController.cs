@@ -31,43 +31,54 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
-    [HttpGet("firstName")]
-    public async Task<IActionResult> GetUsersByFirstName(string firstName)
+    [HttpGet("filter")]
+    public async Task<IActionResult> FilterUser(string? firstName, string? lastName, Gender gender, Role role)
     {
-        var users = await _usersService.GetUsersByFirstName(firstName);
-
+        var users = await _usersService.FilterUsers(firstName, lastName, gender, role);
         if (!users.Any())
             return NotFound();
         return Ok(users);
+        
     }
+    
 
-    [HttpGet("lastName")]
-    public async Task<IActionResult> GetUsersByLastName(string lastName)
-    {
-        var users = await _usersService.GetUsersByLastName(lastName);
-        if (!users.Any())
-            return NotFound();
-        return Ok(users);
-    }
-
-    [HttpGet("gender")]
-    public async Task<IActionResult> GetUsersByGender(Gender gender)
-    {
-        var users = await _usersService.GetUsersByGender(gender);
-        if (!users.Any())
-            return NotFound();
-        return Ok(users);
-    }
-
-
-    [HttpGet("role")]
-    public async Task<IActionResult> GetUsersByRole(Role role)
-    {
-        var users = await _usersService.GetUsersByRole(role);
-        if (!users.Any())
-            return NotFound();
-        return Ok(users);
-    }
+    // [HttpGet("firstName")]
+    // public async Task<IActionResult> GetUsersByFirstName(string firstName)
+    // {
+    //     var users = await _usersService.GetUsersByFirstName(firstName);
+    //
+    //     if (!users.Any())
+    //         return NotFound();
+    //     return Ok(users);
+    // }
+    //
+    // [HttpGet("lastName")]
+    // public async Task<IActionResult> GetUsersByLastName(string lastName)
+    // {
+    //     var users = await _usersService.GetUsersByLastName(lastName);
+    //     if (!users.Any())
+    //         return NotFound();
+    //     return Ok(users);
+    // }
+    //
+    // [HttpGet("gender")]
+    // public async Task<IActionResult> GetUsersByGender(Gender gender)
+    // {
+    //     var users = await _usersService.GetUsersByGender(gender);
+    //     if (!users.Any())
+    //         return NotFound();
+    //     return Ok(users);
+    // }
+    //
+    //
+    // [HttpGet("role")]
+    // public async Task<IActionResult> GetUsersByRole(Role role)
+    // {
+    //     var users = await _usersService.GetUsersByRole(role);
+    //     if (!users.Any())
+    //         return NotFound();
+    //     return Ok(users);
+    // }
 
     [HttpPost]
     public async Task<IActionResult> Post(User user)
